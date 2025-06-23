@@ -48,10 +48,7 @@ public class CopyTextSection implements Task {
 
         String backCardText = BACK_CARD_RETIREMENT_SERVICES.resolveFor(actor).getText();
 
-        LOGGER.info(
-                "Text find -> {}",
-                backCardText
-        );
+        actor.remember("copied_text", backCardText);
     }
 
     public static CopyTextSection on(String section) {

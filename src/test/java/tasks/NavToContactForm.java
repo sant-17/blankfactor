@@ -28,6 +28,11 @@ public class NavToContactForm implements Task {
         actor.attemptsTo(
                 Click.on(BTN_GET_STARTED.of(buttonName))
         );
+
+        LOGGER.info(
+                "Text copied -> {}",
+                actor.recall("copied_text").toString()
+        );
     }
 
     public static NavToContactForm click(String buttonName) {

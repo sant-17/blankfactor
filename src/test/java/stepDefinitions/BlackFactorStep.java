@@ -26,31 +26,37 @@ public class BlackFactorStep {
     }
 
     @When("navigates to the {string} section and opens the {string} page")
-    public void navigatesToTheSectionAndOpensThePage(String navItem, String navSection) {
+    public void navigatesToTheSectionAndOpensThePage(String navSection, String navPage) {
         OnStage.theActorInTheSpotlight().attemptsTo(
-                NavigateIntoNavbar.toSection(navItem, navSection)
+                NavigateIntoNavbar.toSection(navSection, navPage)
         );
     }
 
     @And("copy the text from the third tile in the {string} section")
-    public void copyTheTextFromTheThirdTileInTheSection(String section) {
+    public void copyTheTextFromTheThirdTileInTheSection(String pageSection) {
         OnStage.theActorInTheSpotlight().attemptsTo(
-                CopyTextSection.on(section)
+                CopyTextSection.on(pageSection)
         );
     }
 
     @And("clicks on the {string} button")
-    public void clicksOnTheButton(String buttonText) {
+    public void clicksOnTheButton(String redirectButton) {
         OnStage.theActorInTheSpotlight().attemptsTo(
-                NavToContactForm.click(buttonText)
+                NavToContactForm.click(redirectButton)
         );
     }
 
-    @Then("the user should see that the current URL and page title indicate the {string} page")
-    public void theUserShouldSeeThatTheCurrentURLAndPageTitleIndicateThePage(String contact) {
+    @Then("the user should see that the current URL indicate the {string} page")
+    public void theUserShouldSeeThatTheCurrentURLIndicateThePage(String currentPage) {
         OnStage.theActorInTheSpotlight().should(
-                GivenWhenThen.seeThat(ValidateUrlContent.value(contact)),
-                GivenWhenThen.seeThat(ValidateTitleContent.value(contact))
+                GivenWhenThen.seeThat(ValidateUrlContent.value(currentPage))
+        );
+    }
+
+    @And("the page title indicate the {string} page")
+    public void thePageTitleIndicateThePage(String currentPage) {
+        OnStage.theActorInTheSpotlight().should(
+                GivenWhenThen.seeThat(ValidateTitleContent.value(currentPage))
         );
     }
 }
